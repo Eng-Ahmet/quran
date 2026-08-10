@@ -143,6 +143,7 @@
         }
 
         window.onload = function() {
+            if (typeof verificarAccesoAdmin === 'function' && !verificarAccesoAdmin()) return;
             renderizarMaqraasAdmin();
             renderizarUsuariosAdmin();
         };

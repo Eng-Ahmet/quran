@@ -1,4 +1,37 @@
-/* ====== ADMIN DASHBOARD CONTROL LOGIC ====== */
+/* ====== ADMIN DASHBOARD CONTROL LOGIC & ACCESS PROTECTION ====== */
+
+function verificarAccesoAdmin() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const userRole = localStorage.getItem('userRole');
+    const userEmail = localStorage.getItem('userEmail');
+
+    const isAdmin = isLoggedIn && (userRole === 'admin' || userEmail === 'ahmet@gmail.com');
+
+    if (!isAdmin) {
+        document.body.innerHTML = `
+            <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #040906; color: white; padding: 20px; font-family: 'Tajawal', sans-serif;" dir="rtl">
+                <div style="background: rgba(14, 36, 23, 0.95); border: 2px solid #f44336; padding: 40px 25px; border-radius: 24px; text-align: center; max-width: 440px; box-shadow: 0 15px 45px rgba(0,0,0,0.9);">
+                    <div style="width: 85px; height: 85px; border-radius: 50%; background: rgba(244, 67, 54, 0.15); border: 2px solid #f44336; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; box-shadow: 0 0 25px rgba(244, 67, 54, 0.3);">
+                        <i class="fa-solid fa-lock" style="font-size: 2.4em; color: #f44336;"></i>
+                    </div>
+                    <h2 style="color: #f44336; font-size: 1.7em; margin-bottom: 12px; font-family: 'Amiri', serif;">🚫 غَير مُصرّح بالدخول</h2>
+                    <p style="color: #a0b5a9; font-size: 1.05em; line-height: 1.7; margin-bottom: 28px;">
+                        عذراً، هذه اللوحة مخصصة حصرياً لمشرفي النظام. يرجى تسجيل الدخول بحساب المشرف للوصول إلى هذه الصفحة.
+                    </p>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <a href="login.html" class="btn-primary" style="text-decoration: none; display: block; background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: white; border-radius: 12px; font-size: 1.05em; padding: 12px;">
+                            🔑 تسجيل الدخول كـ مشرف
+                        </a>
+                        <a href="app.html" style="color: var(--color-gold-light); text-decoration: none; font-size: 0.95em; padding: 11px; border: 1px solid var(--color-border); border-radius: 12px; display: block; background: rgba(255,255,255,0.05);">
+                            ← العودة للتطبيق الرئيسي
+                        </a>
+                    </div>
+                </div>
+            </div>`;
+        return false;
+    }
+    return true;
+}
 
 function publicarMaqraa() {
     const titulo = document.getElementById('admin-titulo')?.value;

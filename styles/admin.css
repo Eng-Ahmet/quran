@@ -168,3 +168,54 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
     font-weight: 700;
 }
+
+/* ====== RESPONSIVE MEDIA QUERIES FOR MOBILE & TABLETS ====== */
+@media (max-width: 768px) {
+    body {
+        padding: 12px !important;
+    }
+
+    .admin-container {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .admin-panel {
+        min-width: 100%;
+        padding: 20px 15px;
+    }
+
+    .admin-header h1 {
+        font-size: 1.8em;
+    }
+
+    .admin-nav-bar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .users-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .maqraa-card {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .maqraa-card button {
+        width: 100%;
+    }
+
+    .user-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .user-actions button {
+        width: 100%;
+    }
+}
