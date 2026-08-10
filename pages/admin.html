@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- PRIMARY SEO META TAGS -->
+    <title>لوحة التحكم بالمشرف - ورتل القرآن ترتيلا</title>
+    <meta name="title" content="لوحة التحكم بالمشرف - ورتل القرآن ترتيلا">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- PWA & MOBILE META TAGS -->
+    <meta name="theme-color" content="#040906">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../assets/icon-512.png">
+    <link rel="shortcut icon" href="../assets/favicon.png">
+
+    <!-- PRECONNECT FOR GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- CSS STYLES & FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/admin.css">
+</head>
+<body style="overflow-y: auto; display: block; padding: 20px;">
+
+    <header class="admin-nav-bar">
+        <a href="app.html" class="btn-primary" style="width: auto; padding: 10px 20px; text-decoration: none;">
+            ← العودة للتطبيق الرئيسي
+        </a>
+        <a href="../index.html" style="color: var(--color-gold); text-decoration: none; font-weight: bold;">
+            🏠 الصفحة الرئيسية
+        </a>
+    </header>
+
+    <main>
+        <div class="admin-header">
+            <h1>لوحة تحكم المشرف</h1>
+            <p style="color: var(--color-text-muted);">إدارة مقارئ القرآن الكريم، نشر سؤال اليوم، والتحكم بصلاحيات المستخدمين</p>
+        </div>
+
+        <div class="admin-container">
+            <!-- PANEL 1: ADD MAQRAA -->
+            <section class="admin-panel">
+                <h2>➕ إضافة مقرأة قرآنيّة</h2>
+                <div class="form-group">
+                    <label>العنوان</label>
+                    <input type="text" id="admin-titulo" placeholder="مثال: مقرأة الترتيل والتجويد">
+                </div>
+                <div class="form-group">
+                    <label>العنوان الفرعي</label>
+                    <input type="text" id="admin-subtitulo" placeholder="مستوى مبتدئ ومتقدم">
+                </div>
+                <div class="form-group">
+                    <label>السعر باليورو (€)</label>
+                    <input type="number" id="admin-precio" placeholder="15">
+                </div>
+                <div class="form-group">
+                    <label>المعلم / الشيخ</label>
+                    <input type="text" id="admin-profesor" placeholder="الشيخ أحمد الحمود">
+                </div>
+                <div class="form-group">
+                    <label>الوصف والتفاصيل</label>
+                    <textarea id="admin-desc" rows="4" placeholder="اكتب وصف المقرأة وأوقات الحلقات..."></textarea>
+                </div>
+                <button class="btn-primary" onclick="publicarMaqraa()">🚀 نشر المقرأة</button>
+            </section>
+
+            <!-- PANEL 2: PUBLISH QUESTION OF THE DAY -->
+            <section class="admin-panel">
+                <h2>❓ سؤال اليوم التفاعلي</h2>
+                <div class="form-group">
+                    <label>نص السؤال</label>
+                    <input type="text" id="admin-pregunta" placeholder="ما هي أول سورة نزلت في القرآن؟">
+                </div>
+                <div class="form-group">
+                    <label>الخيار 1</label>
+                    <input type="text" id="admin-opcion-0" placeholder="سورة الفاتحة">
+                </div>
+                <div class="form-group">
+                    <label>الخيار 2</label>
+                    <input type="text" id="admin-opcion-1" placeholder="سورة العلق">
+                </div>
+                <div class="form-group">
+                    <label>الخيار 3</label>
+                    <input type="text" id="admin-opcion-2" placeholder="سورة المدثر">
+                </div>
+                <div class="form-group">
+                    <label>الإجابة الصحيحة</label>
+                    <select id="admin-correcta">
+                        <option value="0">الخيار 1</option>
+                        <option value="1">الخيار 2</option>
+                        <option value="2">الخيار 3</option>
+                    </select>
+                </div>
+                <button class="btn-primary" onclick="publicarPregunta()">❓ نشر السؤال</button>
+            </section>
+
+            <!-- PANEL 3: PUBLISHED MAQRAAS -->
+            <section class="admin-panel">
+                <h2>📜 المقارئ المنشورة</h2>
+                <div id="lista-admin-maqraas"></div>
+            </section>
+
+            <!-- PANEL 4: USER MANAGEMENT (إدارة المستخدمين) -->
+            <section class="admin-panel" style="flex: 100%;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--color-border); padding-bottom: 15px; margin-bottom: 20px;">
+                    <h2 style="border: none; padding: 0; margin: 0;">👥 إدارة المستخدمين المسجلين</h2>
+                    <span id="admin-user-count" style="background: rgba(212, 175, 55, 0.15); color: var(--color-gold); padding: 6px 16px; border-radius: 20px; font-weight: bold; border: 1px solid var(--color-border);">0 مستخدم</span>
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <input type="text" id="input-buscar-usuario" placeholder="🔍 بحث عن مستخدم بالاسم أو البريد الإلكتروني..." oninput="filtrarUsuariosAdmin(this.value)">
+                </div>
+
+                <div id="lista-admin-usuarios" class="users-grid"></div>
+            </section>
+        </div>
+    </main>
+
+    <div id="toast">✅ تم النشر بنجاح!</div>
+
+    <!-- JAVASCRIPT MODULES -->
+    <script src="../scripts/db.js"></script>
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/admin.js"></script>
+
+    <!-- PWA SERVICE WORKER REGISTER -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('../sw.js')
+                    .then(reg => console.log('PWA ServiceWorker registered from admin!'))
+                    .catch(err => console.log('PWA SW register error:', err));
+            });
+        }
+
+        window.onload = function() {
+            renderizarMaqraasAdmin();
+            renderizarUsuariosAdmin();
+        };
+    </script>
+</body>
+</html>

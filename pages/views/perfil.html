@@ -1,0 +1,31 @@
+<div id="pantalla-perfil" class="tab-content">
+    <div class="card" style="text-align: center; border-radius: 20px;">
+        <h3 style="margin-bottom: 20px; border-bottom: 1px solid var(--color-border); padding-bottom: 15px;" data-i18n="profile_title">👤 الملف الشخصي والحساب</h3>
+        
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 25px;">
+            <div style="width: 90px; height: 90px; border-radius: 50%; background: rgba(14, 36, 23, 0.9); border: 2px solid var(--color-gold); display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: bold; color: var(--color-gold-light); box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);">A</div>
+            <div id="perfil-role-badge">
+                <span style="background: rgba(212, 175, 55, 0.15); color: var(--color-gold); border: 1px solid rgba(212, 175, 55, 0.3); padding: 4px 14px; border-radius: 12px; font-weight: bold; font-size: 0.85em;">حساب ضيف (زائر)</span>
+            </div>
+        </div>
+
+        <div class="form-group" style="text-align: start; margin-bottom: 15px;">
+            <label data-i18n="profile_name_lbl">اسم الحساب</label>
+            <input type="text" id="perfil-nombre-input" value="زائر التطبيق" readonly>
+        </div>
+
+        <div class="form-group" style="text-align: start; margin-bottom: 25px;">
+            <label>البريد الإلكتروني المسجل</label>
+            <div id="perfil-email-display" style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 10px; color: var(--color-gold-light); font-weight: bold; border: 1px solid var(--color-border);">حساب ضيف مؤقت</div>
+        </div>
+    </div>
+    
+    <div class="card" id="tarjeta-sesion" style="text-align: center; padding: 25px 20px; border-radius: 20px;">
+        <a href="login.html" id="btn-login-perfil" class="btn-primary" style="text-decoration: none; display: block; margin-bottom: 10px; background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);">
+            🔑 تسجيل الدخول / حساب جديد
+        </a>
+        <button id="btn-logout-perfil" class="btn-delete" style="width: 100%; justify-content: center; padding: 14px; display: none;" onclick="logoutUser()">
+            🚪 تسجيل الخروج من الحساب
+        </button>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div id="pantalla-apuntes" class="tab-content">
+    <div class="card">
+        <h3 style="border-bottom: 1px solid var(--color-border); padding-bottom: 15px; margin-bottom: 20px;" data-i18n="notes_title">تسجيل القراءة</h3>
+        <div class="form-group">
+            <label data-i18n="notes_surah_lbl">السورة</label>
+            <select id="select-surah-apuntes">
+                <option value="">جاري تحميل السور...</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-i18n="notes_ayah_lbl">رقم الآية</label>
+            <input type="number" id="input-ayah-apuntes" placeholder="مثال: 45">
+        </div>
+        <div class="form-group">
+            <label data-i18n="notes_desc_lbl">الوصف / ملاحظات</label>
+            <textarea id="input-desc-apuntes" rows="3" data-i18n="notes_desc_ph" placeholder="أضف ملاحظة أو تأملات حول قراءتك..."></textarea>
+        </div>
+        <button class="btn-primary" onclick="guardarApunte()" data-i18n="notes_save_btn">حفظ التقدم</button>
+    </div>
+    
+    <div id="contenedor-apuntes-guardados">
+        <h3 style="color: var(--color-gold); margin-bottom: 15px; margin-top: 30px;" data-i18n="notes_my_notes">ملاحظاتي</h3>
+        <div id="lista-mis-apuntes"></div>
+    </div>
+</div>

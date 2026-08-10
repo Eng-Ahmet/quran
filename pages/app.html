@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>ورتل القرآن ترتيلا - التطبيق الرئيسي</title>
+
+    <!-- PWA & MOBILE META TAGS -->
+    <meta name="theme-color" content="#040906">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ورتل القرآن">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../assets/icon-512.png">
+    <link rel="shortcut icon" href="../assets/favicon.png">
+
+    <!-- PRECONNECT FOR EXTERNAL APIS & FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://api.alquran.cloud" crossorigin>
+    <link rel="preconnect" href="https://ummahapi.com" crossorigin>
+
+    <!-- CSS STYLES & FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/app.css">
+</head>
+<body dir="rtl">
+
+    <!-- CONTENEDOR DE NOTIFICACIONES TIPO ATHKAR -->
+    <div id="notificaciones-container"></div>
+
+    <!-- MODAL SUCCESS -->
+    <div id="modal-success" class="modal-overlay" dir="rtl">
+        <div class="auth-card" style="padding: 30px; text-align: center; max-width: 360px;">
+            <div style="width: 80px; height: 80px; border-radius: 50%; background: #4caf50; display:flex; align-items:center; justify-content:center; box-shadow: 0 0 25px rgba(76, 175, 80, 0.5); margin: 0 auto 20px auto;">
+                <svg viewBox="0 0 24 24" style="width:40px; height:40px; fill:none; stroke:white; stroke-width:3; stroke-linecap:round; stroke-linejoin:round;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h3 id="success-msg" style="color: white; margin-bottom: 25px; font-size: 1.25em; line-height: 1.5;">تمت العملية بنجاح!</h3>
+            <button class="btn-primary" id="btn-success-ok" style="background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); color: white; width: 100%; border-radius: 12px; font-size: 1.1em;" onclick="document.getElementById('modal-success').style.display='none'">موافق</button>
+        </div>
+    </div>
+
+    <!-- MODAL CONFIRMATION -->
+    <div id="modal-confirm" class="modal-overlay" dir="rtl">
+        <div class="auth-card" style="padding: 30px; text-align: center; max-width: 360px;">
+            <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(244, 67, 54, 0.15); border: 2px solid #f44336; display:flex; align-items:center; justify-content:center; margin: 0 auto 20px auto;">
+                <svg viewBox="0 0 24 24" style="width:40px; height:40px; fill:none; stroke:#f44336; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            </div>
+            <h3 id="confirm-msg" style="color: white; margin-bottom: 25px; font-size: 1.25em; line-height: 1.5;">هل أنت متأكد؟</h3>
+            <div style="display: flex; gap: 12px; flex-direction: row;">
+                <button class="btn-primary" id="btn-confirm-cancel" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid var(--color-border); flex: 1;" onclick="document.getElementById('modal-confirm').style.display='none'">إلغاء</button>
+                <button class="btn-primary" id="btn-confirm-yes" style="background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%); color: white; flex: 1;">نعم، تأكيد</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL REQUIRE LOGIN FOR GUEST ACCESS TO PRIVATE TABS -->
+    <div id="modal-login-required" class="modal-overlay" dir="rtl">
+        <div class="auth-card" style="padding: 30px 25px; text-align: center; max-width: 380px; border-radius: 20px;">
+            <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(212, 175, 55, 0.15); border: 2px solid var(--color-gold); display:flex; align-items:center; justify-content:center; margin: 0 auto 20px auto; box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);">
+                <i class="fa-solid fa-lock" style="font-size: 2.2em; color: var(--color-gold-light);"></i>
+            </div>
+            <h3 style="color: white; margin-bottom: 10px; font-size: 1.3em;">🔒 هذه الخاصية تتطلب تسجيل الدخول</h3>
+            <p style="color: var(--color-text-muted); font-size: 0.95em; line-height: 1.7; margin-bottom: 25px;">
+                عذراً زائرنا الكريم، خاصية (ملاحظات القراءة / المقرأة / الملف الشخصي) مخصصة للحسابات المسجلة لحفظ بياناتك. يرجى تسجيل الدخول أو إنشاء حساب مجاني.
+            </p>
+            <div style="display: flex; gap: 12px; flex-direction: column;">
+                <a href="login.html" class="btn-primary" style="text-decoration: none; display: block; background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: white; border-radius: 12px; font-size: 1.05em; padding: 12px;">
+                    🔑 تسجيل الدخول الآن
+                </a>
+                <button class="btn-primary" style="background: rgba(255,255,255,0.08); color: white; border: 1px solid var(--color-border); border-radius: 12px; font-size: 0.95em; padding: 10px;" onclick="document.getElementById('modal-login-required').style.display='none'">
+                    المتابعة كزائر
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-side" style="justify-content: flex-start;">
+                <div class="menu-toggle" id="btn-menu" onclick="toggleSidebar()"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+                <div class="back-btn" id="btn-atras" onclick="cerrarLectura()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></div>
+            </div>
+
+            <h1 id="app-title" data-i18n="app_title">ورتل القران ترتيلا</h1>
+            
+            <div class="header-side" id="header-logo" style="justify-content: flex-end;"></div>
+        </div>
+
+        <div class="main-wrapper">
+            <!-- SIDEBAR -->
+            <div class="sidebar closed" id="sidebar">
+                <div class="nav-item active" onclick="cambiarPestana('pantalla-inicio')"><svg class="icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span class="nav-text" data-i18n="nav_home">الرئيسية</span></div>
+                <div class="nav-item" onclick="cambiarPestana('pantalla-azkar')"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line></svg><span class="nav-text" data-i18n="nav_azkar">أذكار</span></div>
+                <div class="nav-item" onclick="cambiarPestana('pantalla-coran')"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg><span class="nav-text" data-i18n="nav_coran">قرآن</span></div>
+                
+                <div class="nav-item" onclick="cambiarPestana('pantalla-qibla')">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                    <span class="nav-text" data-i18n="nav_qibla">القبلة</span>
+                </div>
+
+                <div class="nav-item" onclick="cambiarPestana('pantalla-apuntes')"><svg class="icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg><span class="nav-text" data-i18n="nav_notes">ملاحظات</span></div>
+                <div class="nav-item" onclick="cambiarPestana('pantalla-maqraa')"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg><span class="nav-text" data-i18n="nav_maqraa">المقرأة</span></div>
+                <div class="nav-item" onclick="cambiarPestana('pantalla-emociones')"><svg class="icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2"></path></svg><span class="nav-text" data-i18n="nav_emotions">بماذا تشعر؟</span></div>
+                <div class="nav-item" onclick="cambiarPestana('pantalla-ajustes')"><i class="fa-solid fa-gear" style="font-size: 1.2em; margin-left: 10px; color: var(--color-gold);"></i><span class="nav-text" data-i18n="nav_settings">الإعدادات</span></div>
+                <div class="nav-item" onclick="cambiarPestana('pantalla-perfil')"><div class="profile-pic-small">A</div><span class="nav-text" id="menu-perfil-nombre" data-i18n="nav_profile">الملف الشخصي</span></div>
+                
+                <div class="nav-item" onclick="cambiarPestana('pantalla-sobre-mi')">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    <span class="nav-text" data-i18n="nav_about">عني</span>
+                </div>
+            </div>
+
+            <div class="content-wrapper">
+                <!-- CONTENEDOR DINÁMICO DE PESTAÑAS (MODULAR VIEWS LOADER) -->
+                <div class="tabs-container" id="contenedor-pestanas">
+                    <div style="text-align:center; padding: 40px; color: var(--color-gold-light);">جاري تحميل الصفحات...</div>
+                </div>
+
+                <!-- CONTADOR DEL ROSARIO (المسبحة الإلكترونية المطورة) -->
+                <div class="pantalla-lectura" id="pantalla-tasbeeh-contador">
+                    <!-- POPUP DE CELEBRACIÓN / EXITO (اكتملت الدورة) -->
+                    <div id="tasbeeh-tick-popup" class="tasbeeh-modal-popup" style="display:none;">
+                        <div class="tasbeeh-popup-card">
+                            <div class="tasbeeh-popup-icon-glow">
+                                <i class="fa-solid fa-circle-check" style="font-size: 3.5em; color: #4caf50; filter: drop-shadow(0 0 20px rgba(76, 175, 80, 0.8));"></i>
+                            </div>
+                            <h2 style="color: #fdf0a6; font-family: 'Amiri', serif; font-size: 2.2em; margin-top: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">🎉 اكتملت الدورة بنجاح!</h2>
+                            <p style="color: #a0b5a9; font-size: 1.1em; margin-top: 5px; font-weight: bold;">تقبّل الله طاعتكم وصالح أعمالكم</p>
+                        </div>
+                    </div>
+
+                    <div class="lectura-card tasbeeh-counter-card" style="padding: 25px 20px; position:relative; margin-top: 15px; border-radius: 24px; background: rgba(8, 20, 14, 0.95); border: 1px solid var(--color-gold); box-shadow: 0 15px 40px rgba(0,0,0,0.8);">
+                        <!-- TITLE & SUBTITLE -->
+                        <div style="text-align: center; margin-bottom: 20px; border-bottom: 1px dashed var(--color-border); padding-bottom: 15px;">
+                            <h3 id="tasbeeh-titulo" style="color: var(--color-gold-light); font-size: 2em; font-family: 'Amiri', serif; margin-bottom: 5px; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">سبحان الله</h3>
+                            <span style="color: var(--color-text-muted); font-size: 0.9em; background: rgba(212, 175, 55, 0.1); padding: 4px 14px; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">
+                                <i class="fa-solid fa-kaaba" style="color: var(--color-gold);"></i> المسبحة الإلكترونية الذكية
+                            </span>
+                        </div>
+
+                        <!-- STATS GRID CARDS -->
+                        <div class="tasbeeh-stats-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 30px;">
+                            <div class="tasbeeh-stat-box" style="background: rgba(255,255,255,0.03); border: 1px solid var(--color-border); padding: 15px; border-radius: 16px; text-align: center;">
+                                <div style="color: var(--color-text-muted); font-size: 0.9em; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 6px;" data-i18n="tasbeeh_target">
+                                    <i class="fa-solid fa-bullseye" style="color: var(--color-gold);"></i> <span>هدف الدورة</span>
+                                </div>
+                                <div id="tasbeeh-target" style="font-size: 1.6em; font-weight: bold; color: var(--color-gold-light);">33</div>
+                            </div>
+                            <div class="tasbeeh-stat-box" style="background: rgba(255,255,255,0.03); border: 1px solid var(--color-border); padding: 15px; border-radius: 16px; text-align: center;">
+                                <div style="color: var(--color-text-muted); font-size: 0.9em; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 6px;" data-i18n="tasbeeh_cycle">
+                                    <i class="fa-solid fa-rotate" style="color: #4caf50;"></i> <span>الدورات المكتملة</span>
+                                </div>
+                                <div id="tasbeeh-cycles" style="font-size: 1.6em; font-weight: bold; color: #4caf50;">0</div>
+                            </div>
+                            <div class="tasbeeh-stat-box" style="background: rgba(212, 175, 55, 0.08); border: 1px solid var(--color-gold); padding: 15px; border-radius: 16px; text-align: center; grid-column: span 2;">
+                                <div style="color: var(--color-gold); font-size: 0.95em; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 6px;" data-i18n="tasbeeh_total">
+                                    <i class="fa-solid fa-chart-line"></i> <span>المجموع الكلي للتسبيحات</span>
+                                </div>
+                                <div id="tasbeeh-total" style="font-size: 1.9em; font-weight: bold; color: #ffffff;">0</div>
+                            </div>
+                        </div>
+
+                        <!-- MAIN TOUCH COUNTER BUTTON WITH INDEX FINGER TOUCH ICON & PULSE -->
+                        <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; position: relative;">
+                            <div class="tasbeeh-main-btn-wrapper" style="position: relative; width: 210px; height: 210px; display:flex; align-items:center; justify-content:center;">
+                                <svg class="tasbeeh-progress-ring" width="210" height="210" style="position: absolute; top: 0; left: 0; transform: rotate(-90deg); pointer-events: none;">
+                                    <circle class="ring-bg" cx="105" cy="105" r="95" stroke="rgba(255,255,255,0.08)" stroke-width="8" fill="transparent"></circle>
+                                    <circle id="tasbeeh-ring-bar" class="ring-bar" cx="105" cy="105" r="95" stroke="#d4af37" stroke-width="8" fill="transparent" stroke-dasharray="596.9" stroke-dashoffset="596.9" stroke-linecap="round" style="transition: stroke-dashoffset 0.25s cubic-bezier(0.4, 0, 0.2, 1);"></circle>
+                                </svg>
+
+                                <button class="tasbeeh-main-btn" id="btn-incrementar-tasbeeh" onclick="incrementarTasbeeh()" aria-label="انقر للتسبيح">
+                                    <div class="tasbeeh-btn-content">
+                                        <i class="fa-solid fa-hand-pointer tasbeeh-touch-icon"></i>
+                                        <div id="tasbeeh-current" class="tasbeeh-current-num">0</div>
+                                        <span class="tasbeeh-btn-hint">إلمس هنا للتسبيح</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- RESET & UTILITIES FOOTER -->
+                        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px; border-top: 1px dashed var(--color-border); padding-top: 15px;">
+                            <button class="btn-secondary" style="width: auto; padding: 8px 20px; font-size: 0.9em; background: rgba(244, 67, 54, 0.12); color: #f44336; border: 1px solid rgba(244, 67, 54, 0.3); border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;" onclick="reiniciarContadorActual()">
+                                <i class="fa-solid fa-arrow-rotate-left"></i> <span>إعادة ضبط الدورة</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANTALLA DE LECTURA AZKAR / HADITH / DUA -->
+                <div class="pantalla-lectura" id="pantalla-lectura">
+                    <div id="contenedor-tarjetas-azkar"></div>
+                </div>
+
+                <!-- BARRA INFERIOR DE NAVEGACIÓN -->
+                <div class="floating-bottom-nav" id="barra-inferior">
+                    <!-- 1. HOME -->
+                    <div class="nav-item-pill active" onclick="cambiarPestana('pantalla-inicio')" data-target="pantalla-inicio" title="الرئيسية">
+                        <i class="fa-solid fa-house" style="font-size: 1.2em; color: inherit;"></i>
+                    </div>
+
+                    <!-- 2. AZKAR -->
+                    <div class="nav-item-pill" onclick="cambiarPestana('pantalla-azkar')" data-target="pantalla-azkar" title="أذكار">
+                        <i class="fa-solid fa-kaaba" style="font-size: 1.25em; color: inherit;"></i>
+                    </div>
+
+                    <!-- 3. CENTER MAIN ACTION: HOLY QURAN -->
+                    <div class="center-action-wrapper" onclick="cambiarPestana('pantalla-coran')" data-target="pantalla-coran" title="القرآن الكريم">
+                        <div class="center-action-btn">
+                            <i class="fa-solid fa-book-quran" style="font-size: 1.5em; color: var(--color-gold-light);"></i>
+                        </div>
+                    </div>
+
+                    <!-- 4. TASBEEH -->
+                    <div class="nav-item-pill" onclick="cambiarPestana('pantalla-tasbeeh')" data-target="pantalla-tasbeeh" title="المسبحة">
+                        <i class="fa-solid fa-hands-praying" style="font-size: 1.25em; color: inherit;"></i>
+                    </div>
+
+                    <!-- 5. SETTINGS -->
+                    <div class="nav-item-pill" onclick="cambiarPestana('pantalla-ajustes')" data-target="pantalla-ajustes" title="الإعدادات">
+                        <i class="fa-solid fa-gear" style="font-size: 1.25em; color: inherit;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT MODULES -->
+    <script src="../scripts/db.js"></script>
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/i18n.js"></script>
+    <script src="../scripts/azkar.js"></script>
+    <script src="../scripts/quran.js"></script>
+    <script src="../scripts/tasbeeh.js"></script>
+    <script src="../scripts/qibla.js"></script>
+    <script src="../scripts/login.js"></script>
+    <script src="../scripts/app.js"></script>
+
+    <!-- PWA SERVICE WORKER REGISTER -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('../sw.js')
+                    .then(reg => console.log('PWA ServiceWorker registered from app shell!'))
+                    .catch(err => console.log('PWA SW register error:', err));
+            });
+        }
+    </script>
+</body>
+</html>

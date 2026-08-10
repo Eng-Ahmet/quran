@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- PRIMARY SEO META TAGS -->
+    <title>ورتل القرآن ترتيلا - التطبيق الإسلامي الشامل للمصحف والأذكار والقبلة</title>
+    <meta name="title" content="ورتل القرآن ترتيلا - التطبيق الإسلامي الشامل للمصحف والأذكار والقبلة">
+    <meta name="description" content="تطبيق إسلامي شامل وموثوق لقراءة وتدبر القرآن الكريم، الأذكار اليومية، المسبحة الإلكترونية الذكية، اتجاه القبلة، وبماذا تشعر، بدعم كامل للعمل بدون إنترنت (PWA).">
+    <meta name="keywords" content="القرآن الكريم, مصحف, أذكار الصباح والمساء, قبلة, مسبحة إلكترونية, وتلاوة القرآن, ورتل القرآن ترتيلا, تطبيق إسلامي">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Arabic">
+    <meta name="author" content="ورتل القرآن ترتيلا">
+
+    <!-- OPEN GRAPH / FACEBOOK / WHATSAPP META TAGS -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="./index.html">
+    <meta property="og:title" content="ورتل القرآن ترتيلا - التطبيق الإسلامي الشامل">
+    <meta property="og:description" content="تطبيقك الإسلامي الموثوق للقراءة والتدبر، الأذكار اليومية، المسبحة الإلكترونية، واتجاه القبلة.">
+    <meta property="og:image" content="assets/icon-512.png">
+    <meta property="og:locale" content="ar_SA">
+
+    <!-- TWITTER CARDS -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ورتل القرآن ترتيلا - التطبيق الإسلامي الشامل">
+    <meta name="twitter:description" content="تطبيق إسلامي شامل وموثوق لقراءة القرآن والأذكار واتجاه القبلة.">
+    <meta name="twitter:image" content="assets/icon-512.png">
+
+    <!-- PWA & MOBILE META TAGS -->
+    <meta name="theme-color" content="#040906">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ورتل القرآن">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png">
+    <link rel="shortcut icon" href="assets/favicon.png">
+
+    <!-- PRECONNECT FOR EXTERNAL APIS & FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://api.alquran.cloud" crossorigin>
+
+    <!-- CSS STYLES & FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    
+    <!-- STRUCTURED DATA (SCHEMA.ORG FOR GOOGLE SEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ورتل القرآن ترتيلا",
+      "alternateName": "Wartel Al Quran",
+      "description": "تطبيق إسلامي موثوق وشامل للقرآن الكريم، الأذكار اليومية، المسبحة الإلكترونية، واتجاه القبلة",
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "All",
+      "inLanguage": "ar",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <style>
+        .splash-wrapper {
+            min-height: 100vh;
+            min-height: 100dvh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #020403 0%, #0a1710 50%, #020403 100%);
+            position: relative;
+        }
+
+        .splash-card {
+            background: var(--color-green-panel);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--color-border);
+            border-radius: 28px;
+            padding: 45px 30px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: var(--shadow-deep);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .splash-logo-container {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .splash-logo-svg {
+            width: 110px;
+            height: 110px;
+            filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.4));
+            animation: pulseGlow 3s infinite ease-in-out;
+        }
+
+        .bismillah-title {
+            color: var(--color-gold-light);
+            font-family: 'Amiri', serif;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .app-name {
+            color: var(--color-gold);
+            font-family: 'Amiri', serif;
+            font-size: 2.6em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .splash-desc {
+            color: var(--color-text-muted);
+            font-size: 1.05em;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
+        .splash-btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .splash-btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            padding: 14px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.05em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .splash-btn-secondary:hover {
+            background: rgba(212, 175, 55, 0.12);
+            border-color: var(--color-gold);
+            color: var(--color-gold-light);
+        }
+
+        .pwa-install-badge {
+            margin-top: 25px;
+            display: inline-block;
+            background: rgba(76, 175, 80, 0.15);
+            border: 1px solid #4caf50;
+            color: #4caf50;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="splash-wrapper">
+        <article class="splash-card">
+            <div class="splash-logo-container">
+                <svg class="splash-logo-svg" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fdf0a6" /><stop offset="50%" stop-color="#d4af37" /><stop offset="100%" stop-color="#aa8623" />
+                        </linearGradient>
+                        <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#050b08" /><stop offset="100%" stop-color="#0e2417" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="512" height="512" fill="url(#bg)" rx="115" />
+                    <path d="M 0 120 C 60 120, 120 60, 120 0" fill="none" stroke="url(#gold)" stroke-width="12" />
+                    <path d="M 0 160 C 90 160, 160 90, 160 0" fill="none" stroke="url(#gold)" stroke-width="4" />
+                    <path d="M 512 392 C 452 392, 392 452, 392 512" fill="none" stroke="url(#gold)" stroke-width="12" />
+                    <path d="M 512 352 C 422 352, 352 422, 352 512" fill="none" stroke="url(#gold)" stroke-width="4" />
+                    <path d="M 156 360 C 156 220, 256 120, 256 120 C 256 120, 356 220, 356 360 Z" fill="#0b1a11" />
+                    <rect x="100" y="160" width="20" height="200" fill="#0b1a11" /><polygon points="95,160 125,160 110,120" fill="#0b1a11" />
+                    <rect x="392" y="160" width="20" height="200" fill="#0b1a11" /><polygon points="387,160 417,160 402,120" fill="#0b1a11" />
+                    <path d="M 256 380 L 170 480" stroke="#3b2413" stroke-width="22" stroke-linecap="round" />
+                    <path d="M 256 380 L 342 480" stroke="#3b2413" stroke-width="22" stroke-linecap="round" />
+                    <path d="M 256 380 C 210 380, 140 330, 110 310 L 130 260 C 160 280, 210 330, 256 350 C 302 330, 352 280, 382 260 L 402 310 C 372 330, 302 380, 256 380 Z" fill="url(#gold)" />
+                    <path d="M 256 360 C 210 360, 140 310, 110 290 L 130 240 C 160 260, 210 310, 256 330 C 302 310, 352 260, 382 240 L 402 290 C 372 310, 302 360, 256 360 Z" fill="#fdf0a6" />
+                    <path d="M 256 330 L 256 380" stroke="#aa8623" stroke-width="6" stroke-linecap="round" />
+                </svg>
+            </div>
+
+            <h2 class="bismillah-title">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</h2>
+            <h1 class="app-name">ورتل القرآن ترتيلا</h1>
+            <p class="splash-desc">تطبيقك الإسلامي الموثوق للقراءة والتدبر، الأذكار اليومية، المسبحة الإلكترونية، اتجاه القبلة، والمزيد.</p>
+
+            <div class="splash-btn-group">
+                <a href="pages/app.html" class="btn-primary" style="text-decoration:none;">
+                    🚀 فتح التطبيق الرئيسي
+                </a>
+                <a href="pages/login.html" class="splash-btn-secondary">
+                    🔑 تسجيل الدخول / حساب جديد
+                </a>
+                <a href="pages/admin.html" class="splash-btn-secondary">
+                    ⚙️ لوحة التحكم بالمشرف
+                </a>
+            </div>
+
+            <button id="pwa-install-btn" class="pwa-install-badge" onclick="installPWA()">
+                📲 تثبيت التطبيق على الجوال
+            </button>
+        </article>
+    </main>
+
+    <script src="scripts/db.js"></script>
+    <script src="scripts/api.js"></script>
+
+    <!-- PWA SERVICE WORKER REGISTER -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('PWA ServiceWorker registered! Scope:', reg.scope))
+                    .catch(err => console.log('PWA ServiceWorker registration failed:', err));
+            });
+        }
+
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const btn = document.getElementById('pwa-install-btn');
+            if (btn) btn.style.display = 'inline-block';
+        });
+
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the PWA prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+    </script>
+</body>
+</html>

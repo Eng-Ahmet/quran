@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- PRIMARY SEO META TAGS -->
+    <title>تسجيل الدخول - ورتل القرآن ترتيلا</title>
+    <meta name="title" content="تسجيل الدخول - ورتل القرآن ترتيلا">
+    <meta name="description" content="سجل الدخول أو أنشئ حساباً جديداً في تطبيق ورتل القرآن ترتيلا لحفظ تقدمك اليومي، أذكارك، وملاحظاتك الشخصية.">
+    <meta name="robots" content="index, follow">
+
+    <!-- PWA & MOBILE META TAGS -->
+    <meta name="theme-color" content="#040906">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ورتل القرآن">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../assets/icon-512.png">
+    <link rel="shortcut icon" href="../assets/favicon.png">
+
+    <!-- PRECONNECT FOR GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- CSS STYLES & FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/login.css">
+</head>
+<body>
+
+    <main class="auth-wrapper">
+        <div class="auth-container">
+            <div class="auth-logo-header">
+                <svg class="auth-logo-svg" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fdf0a6" /><stop offset="50%" stop-color="#d4af37" /><stop offset="100%" stop-color="#aa8623" />
+                        </linearGradient>
+                        <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#050b08" /><stop offset="100%" stop-color="#0e2417" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="512" height="512" fill="url(#bg)" rx="115" />
+                    <path d="M 0 120 C 60 120, 120 60, 120 0" fill="none" stroke="url(#gold)" stroke-width="12" />
+                    <path d="M 0 160 C 90 160, 160 90, 160 0" fill="none" stroke="url(#gold)" stroke-width="4" />
+                    <path d="M 512 392 C 452 392, 392 452, 392 512" fill="none" stroke="url(#gold)" stroke-width="12" />
+                    <path d="M 512 352 C 422 352, 352 422, 352 512" fill="none" stroke="url(#gold)" stroke-width="4" />
+                    <path d="M 156 360 C 156 220, 256 120, 256 120 C 256 120, 356 220, 356 360 Z" fill="#0b1a11" />
+                    <rect x="100" y="160" width="20" height="200" fill="#0b1a11" /><polygon points="95,160 125,160 110,120" fill="#0b1a11" />
+                    <rect x="392" y="160" width="20" height="200" fill="#0b1a11" /><polygon points="387,160 417,160 402,120" fill="#0b1a11" />
+                    <path d="M 256 380 L 170 480" stroke="#3b2413" stroke-width="22" stroke-linecap="round" />
+                    <path d="M 256 380 L 342 480" stroke="#3b2413" stroke-width="22" stroke-linecap="round" />
+                    <path d="M 256 380 C 210 380, 140 330, 110 310 L 130 260 C 160 280, 210 330, 256 350 C 302 330, 352 280, 382 260 L 402 310 C 372 330, 302 380, 256 380 Z" fill="url(#gold)" />
+                    <path d="M 256 360 C 210 360, 140 310, 110 290 L 130 240 C 160 260, 210 310, 256 330 C 302 310, 352 260, 382 240 L 402 290 C 372 310, 302 360, 256 360 Z" fill="#fdf0a6" />
+                    <path d="M 256 330 L 256 380" stroke="#aa8623" stroke-width="6" stroke-linecap="round" />
+                </svg>
+                <h1 class="auth-title">ورتل القرآن ترتيلا</h1>
+                <p class="auth-subtitle">سجل الدخول لحفظ تقدمك اليومي وملاحظاتك الشخصية</p>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tab-login-btn" onclick="mostrarVista('login')">تسجيل الدخول</button>
+                <button class="auth-tab-btn" id="tab-register-btn" onclick="mostrarVista('register')">حساب جديد</button>
+            </div>
+
+            <div id="auth-error" class="auth-error-banner"></div>
+
+            <!-- FORM LOGIN -->
+            <form id="form-login" onsubmit="handleLoginSubmit(event)">
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="login-email" placeholder="example@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="login-pass" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-primary">
+                    🔑 دخول لحسابي
+                </button>
+            </form>
+
+            <!-- FORM REGISTER -->
+            <form id="form-register" style="display: none;" onsubmit="handleRegisterSubmit(event)">
+                <div class="form-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" id="reg-name" placeholder="أحمد أسعد حمود" required>
+                </div>
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="reg-email" placeholder="example@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="reg-pass" placeholder="••••••••" required minlength="6">
+                </div>
+                <button type="submit" class="btn-primary">
+                    ✨ إنشاء حساب جديد
+                </button>
+            </form>
+
+            <button class="guest-btn" onclick="continuarComoInvitado()">
+                👤 المتابعة كزائر بدون حساب
+            </button>
+
+            <a href="app.html" class="back-to-home">← العودة للتطبيق الرئيسي</a>
+        </div>
+    </main>
+
+    <!-- JAVASCRIPT MODULES -->
+    <script src="../scripts/db.js"></script>
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/i18n.js"></script>
+    <script src="../scripts/login.js"></script>
+
+    <!-- PWA SERVICE WORKER REGISTER -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('../sw.js')
+                    .then(reg => console.log('PWA ServiceWorker registered from login!'))
+                    .catch(err => console.log('PWA SW register error:', err));
+            });
+        }
+
+        function mostrarVista(vista) {
+            const formLogin = document.getElementById('form-login');
+            const formReg = document.getElementById('form-register');
+            const btnLogin = document.getElementById('tab-login-btn');
+            const btnReg = document.getElementById('tab-register-btn');
+            const errBanner = document.getElementById('auth-error');
+
+            if (errBanner) errBanner.style.display = 'none';
+
+            if (vista === 'login') {
+                if (formLogin) formLogin.style.display = 'block';
+                if (formReg) formReg.style.display = 'none';
+                if (btnLogin) btnLogin.classList.add('active');
+                if (btnReg) btnReg.classList.remove('active');
+            } else {
+                if (formLogin) formLogin.style.display = 'none';
+                if (formReg) formReg.style.display = 'block';
+                if (btnLogin) btnLogin.classList.remove('active');
+                if (btnReg) btnReg.classList.add('active');
+            }
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-pass').value;
+            const res = loginUser(email, pass);
+
+            if (res.success) {
+                window.location.href = 'app.html';
+            } else {
+                const errBanner = document.getElementById('auth-error');
+                if (errBanner) {
+                    errBanner.innerText = res.message;
+                    errBanner.style.display = 'block';
+                }
+            }
+        }
+
+        function handleRegisterSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const pass = document.getElementById('reg-pass').value;
+            const res = registerUser(name, email, pass);
+
+            if (res.success) {
+                window.location.href = 'app.html';
+            } else {
+                const errBanner = document.getElementById('auth-error');
+                if (errBanner) {
+                    errBanner.innerText = res.message;
+                    errBanner.style.display = 'block';
+                }
+            }
+        }
+
+        function continuarComoInvitado() {
+            logoutUser();
+            window.location.href = 'app.html';
+        }
+    </script>
+</body>
+</html>

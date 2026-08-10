@@ -1,0 +1,74 @@
+<div id="pantalla-coran" class="tab-content">
+    <div id="coran-index">
+        <h3 style="color: var(--color-gold); text-align: center; margin-bottom: 5px; font-size: 1.6em;" data-i18n="coran_title">فهرس السور</h3>
+        <p style="text-align: center; color: var(--color-text-muted); font-size: 0.95em; margin-bottom: 25px;" data-i18n="coran_subtitle">القرآن الكريم</p>
+        
+        <!-- TARJETA AYAH DIARIA (آية اليوم المباركة) -->
+        <div class="card" id="tarjeta-ayah-hoy" style="background: rgba(14, 36, 23, 0.9); border: 1px solid var(--color-gold); padding: 20px; margin-bottom: 25px; border-radius: 18px; box-shadow: 0 8px 25px rgba(0,0,0,0.5);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h3 style="margin:0; color: var(--color-gold-light); font-family: 'Amiri', serif; font-size: 1.3em; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-book-open" style="color: var(--color-gold);"></i> <span>آية اليوم المباركة</span>
+                </h3>
+                <span style="background: rgba(212, 175, 55, 0.2); color: var(--color-gold-light); padding: 3px 10px; border-radius: 12px; font-size: 0.8em; font-weight: bold; border: 1px solid rgba(212, 175, 55, 0.4);">
+                    من API القرآن
+                </span>
+            </div>
+            <p id="texto-ayah-hoy" style="font-size: 1.35em; line-height: 1.9; color: #ffffff; font-family: 'Amiri', serif; margin-bottom: 12px; text-align: center;">جاري تحميل آية اليوم المباركة...</p>
+            <div id="meta-ayah-hoy" style="color: var(--color-text-muted); font-size: 0.9em; border-top: 1px dashed var(--color-border); padding-top: 10px; display: flex; justify-content: space-between; gap: 10px;">
+                <span id="ayah-source" style="color: var(--color-gold-light); font-weight: bold;">سورة البقرة</span>
+                <span id="ayah-number" style="color: #a0b5a9;">آية رقم: 255</span>
+            </div>
+        </div>
+
+        <div id="lista-surahs" class="surah-grid">
+            <p style="text-align: center; color: var(--color-gold-light);">جاري تحميل 114 سورة مباركة...</p>
+        </div>
+    </div>
+
+    <!-- MUSHAF PAGE READING VIEW -->
+    <div id="coran-lectura" style="display:none;">
+        <!-- TOOLBAR: 2 CLEAN ROWS TO PREVENT ANY CUTOFF -->
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid var(--color-border); padding-bottom: 12px;">
+            <!-- ROW 1: BACK TO INDEX & FONT ZOOM -->
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                <button class="btn-primary" style="width: auto; padding: 6px 14px; font-size: 0.88em; margin: 0; background: rgba(255,255,255,0.08); border: 1px solid var(--color-border); display: flex; align-items: center; gap: 6px;" onclick="volverAlIndiceCoran()" data-i18n="coran_back">
+                    <i class="fa-solid fa-arrow-right"></i> <span>الفهرس</span>
+                </button>
+
+                <!-- DYNAMIC FONT ZOOM BUTTONS -->
+                <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.04); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--color-border);">
+                    <span style="color: var(--color-text-muted); font-size: 0.82em; margin-inline-end: 2px;">الخط:</span>
+                    <button style="background: rgba(212,175,55,0.15); border: 1px solid var(--color-gold); color: white; padding: 3px 9px; border-radius: 8px; font-weight: bold; font-size: 0.85em; cursor: pointer;" onclick="cambiarTamanoTexto(-0.15)">A-</button>
+                    <button style="background: rgba(255,255,255,0.1); border: 1px solid var(--color-border); color: var(--color-gold-light); padding: 3px 9px; border-radius: 8px; font-weight: bold; font-size: 0.8em; cursor: pointer;" onclick="cambiarTamanoTexto(0)">افتراضي</button>
+                    <button style="background: rgba(212,175,55,0.15); border: 1px solid var(--color-gold); color: white; padding: 3px 9px; border-radius: 8px; font-weight: bold; font-size: 0.85em; cursor: pointer;" onclick="cambiarTamanoTexto(0.15)">A+</button>
+                </div>
+            </div>
+
+            <!-- ROW 2: SURAH NAVIGATION BUTTONS -->
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                <button class="btn-primary" style="flex: 1; padding: 8px 12px; font-size: 0.85em; margin: 0; background: rgba(212,175,55,0.15); border: 1px solid var(--color-gold); color: var(--color-gold-light); text-align: center;" onclick="anteriorSurah()">► السورة السابقة</button>
+                <button class="btn-primary" style="flex: 1; padding: 8px 12px; font-size: 0.85em; margin: 0; background: rgba(212,175,55,0.15); border: 1px solid var(--color-gold); color: var(--color-gold-light); text-align: center;" onclick="siguienteSurah()">السورة التالية ◄</button>
+            </div>
+        </div>
+
+        <!-- MUSHAF PAGE FRAME -->
+        <div class="mushaf-frame" id="mushaf-frame-container">
+            <div id="bismillah-container"></div>
+
+            <div id="contenido-surah" class="mushaf-text-body" style="user-select: text; touch-action: pan-y;"></div>
+
+            <div class="mushaf-footer-bar">
+                <span id="mushaf-surah-label">سورة الفاتحة</span>
+                <span id="quran-page-indicator" style="background: rgba(212,175,55,0.15); color: var(--color-gold); padding: 4px 14px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.3);">صفحة 1 من 1</span>
+                <span id="mushaf-juz-label">الجزء 1</span>
+            </div>
+        </div>
+
+        <!-- PAGINATION NAVIGATION BAR -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; border-top: 1px dashed var(--color-border); padding-top: 12px; gap: 8px;">
+            <button class="btn-primary" style="flex: 1; padding: 10px 12px; font-size: 0.88em; margin: 0; background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: white; border: none; border-radius: 12px; text-align: center;" onclick="paginaAnteriorCoran()">► الصفحة السابقة</button>
+            <button class="btn-primary" style="width: auto; padding: 10px 14px; font-size: 0.85em; margin: 0; background: rgba(255,255,255,0.08); border: 1px solid var(--color-border); border-radius: 12px;" onclick="volverAlIndiceCoran()"><i class="fa-solid fa-arrow-right"></i> الفهرس</button>
+            <button class="btn-primary" style="flex: 1; padding: 10px 12px; font-size: 0.88em; margin: 0; background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: white; border: none; border-radius: 12px; text-align: center;" onclick="paginaSiguienteCoran()">الصفحة التالية ◄</button>
+        </div>
+    </div>
+</div>

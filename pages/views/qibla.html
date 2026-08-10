@@ -1,0 +1,21 @@
+<div id="pantalla-qibla" class="tab-content">
+    <h3 style="color: var(--color-gold); text-align: center; margin-bottom: 25px; font-size: 1.6em;" data-i18n="nav_qibla">بوصلة القبلة</h3>
+    <div class="card" style="text-align: center;">
+        <p id="qibla-status" style="margin-bottom: 25px; font-size: 1.1em; color: #e0e0e0; line-height: 1.6;" data-i18n="qibla_req_location">يرجى السماح بالوصول إلى موقعك والمستشعرات لتحديد اتجاه القبلة.</p>
+        
+        <button class="btn-primary" id="btn-init-qibla" onclick="iniciarQibla()" style="width: auto; padding: 12px 30px; margin: 0 auto 20px auto; font-size: 1.1em;" data-i18n="qibla_btn_start">تحديد القبلة</button>
+        
+        <div id="compass-container" style="display: none; margin-top: 20px;">
+            <div class="compass-bg">
+                <div id="compass-dial" class="compass-dial"></div>
+                <div id="qibla-pointer" class="qibla-pointer">
+                    <div class="qibla-arrow">
+                        <div class="qibla-kaaba">🕋</div>
+                        <div class="qibla-line"></div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 30px; font-size: 2em; color: var(--color-gold-light); font-weight: bold; font-family: 'Amiri', serif;" id="qibla-degrees">0°</div>
+        </div>
+    </div>
+</div>
