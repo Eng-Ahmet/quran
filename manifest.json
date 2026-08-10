@@ -13,6 +13,22 @@
   "lang": "ar",
   "dir": "rtl",
   "categories": ["lifestyle", "books", "education"],
+  "screenshots": [
+    {
+      "src": "assets/screenshot-mobile.png",
+      "sizes": "640x1136",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "واجهة تطبيق ورتل القرآن ترتيلا"
+    },
+    {
+      "src": "assets/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "عرض شاشة الكمبيوتر والأجهزة اللوحية"
+    }
+  ],
   "shortcuts": [
     {
       "name": "القرآن الكريم",

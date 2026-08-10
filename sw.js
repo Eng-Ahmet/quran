@@ -1,6 +1,6 @@
 /* ====== SERVICE WORKER FOR PWA OFFLINE CACHING & AUTOMATIC FRESH RELOADS ====== */
 
-const CACHE_NAME = 'wartel-quran-v23';
+const CACHE_NAME = 'wartel-quran-v24';
 
 const ASSETS_TO_CACHE = [
   './',
