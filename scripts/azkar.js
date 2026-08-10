@@ -404,3 +404,49 @@ function mostrarNotificacionAzkar() {
         }
     }, 15000);
 }
+
+/* ====== NOTIFICATION & PERIODIC SYNC MANAGEMENT (تذكير كل ساعتين) ====== */
+
+async function solicitarPermisoNotificaciones() {
+    if (!('Notification' in window)) {
+        return false;
+    }
+
+    const permission = await Notification.requestPermission();
+    if (permission === 'granted') {
+        if ('serviceWorker' in navigator) {
+            try {
+                const registration = await navigator.serviceWorker.ready;
+                if ('periodicSync' in registration) {
+                    await registration.periodicSync.register('azkar-reminder', {
+                        minInterval: 2 * 60 * 60 * 1000
+                    });
+                }
+            } catch (e) {
+                console.log('[PWA] Periodic sync info:', e);
+            }
+        }
+        iniciarIntervaloRecordatorioDosHoras();
+        return true;
+    }
+    return false;
+}
+
+function iniciarIntervaloRecordatorioDosHoras() {
+    if (window.intervaloRecordatorioAzkar) return;
+
+    window.intervaloRecordatorioAzkar = setInterval(() => {
+        if (typeof Notification !== 'undefined' && Notification.permission === 'granted' && navigator.serviceWorker && navigator.serviceWorker.controller) {
+            navigator.serviceWorker.controller.postMessage({
+                type: 'TRIGGER_NOTIFICATION',
+                title: 'ورتل القرآن ترتيلا 📖',
+                body: '🌸 تذكير كل ساعتين: صلّ على النبي ﷺ واذكر الله (أستغفر الله العظيم)'
+            });
+        }
+    }, 2 * 60 * 60 * 1000);
+}
+
+// Auto init notifications request if already granted
+if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+    iniciarIntervaloRecordatorioDosHoras();
+}

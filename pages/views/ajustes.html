@@ -1,8 +1,8 @@
 <div id="pantalla-ajustes" class="tab-content">
     <div class="card" style="border-color: var(--color-gold); text-align: center; padding: 30px 20px; background: rgba(212, 175, 55, 0.05); border: 2px dashed var(--color-gold);">
-        <div style="font-size: 3em; margin-bottom: 15px;">🚧</div>
-        <h3 style="color: var(--color-gold); font-size: 1.5em; margin-bottom: 10px;" data-i18n="coming_soon_title">قريباً</h3>
-        <p style="color: #ffffff; font-size: 1em;" data-i18n="coming_soon_text">ميزة متابعة التقدم ستكون متوفرة قريباً.</p>
+        <div style="font-size: 3em; margin-bottom: 15px;">🕋</div>
+        <h3 style="color: var(--color-gold); font-size: 1.5em; margin-bottom: 10px;">إحصائيات وورد القراءة</h3>
+        <p style="color: #ffffff; font-size: 1em;">متابعة تقدم القراءة والأختام القرآنية وتفاصيل الأذكار.</p>
     </div>
 
     <div style="display:none;">
@@ -10,7 +10,7 @@
         <span id="stat-tasbeeh"></span>
     </div>
 
-    <div class="card">
+    <div class="card" style="margin-top: 20px;">
         <h3 style="border-bottom: 1px solid var(--color-border); padding-bottom: 15px; margin-bottom: 20px;" data-i18n="settings_prefs">⚙️ الإعدادات</h3>
         <div class="form-group" style="margin-bottom: 30px;">
             <label data-i18n="settings_lang">🌐 تغيير اللغة</label>
@@ -28,5 +28,19 @@
                 <span style="font-size: 24px;">A</span>
             </div>
         </div>
+    </div>
+
+    <!-- PERIODIC SYNC & PUSH NOTIFICATIONS SETTING CARD -->
+    <div class="card" style="margin-top: 20px; background: rgba(14, 36, 23, 0.85); border: 1px solid var(--color-gold);">
+        <h3 style="border-bottom: 1px solid var(--color-border); padding-bottom: 15px; margin-bottom: 20px; color: var(--color-gold-light); display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-bell" style="color: var(--color-gold);"></i> <span>إشعارات الأذكار والتذكير التلقائي</span>
+        </h3>
+        <p style="color: #a0b5a9; font-size: 0.95em; line-height: 1.6; margin-bottom: 20px;">
+            تفعيل التذكير التلقائي الدوري كل ساعتين بالأذكار والصلاة على النبي ﷺ والإستغفار عبر إشعارات الجهاز (Periodic Sync & Push Notifications).
+        </p>
+        <button class="btn-primary" onclick="activarNotificacionesGuiadas()" style="width: 100%; padding: 12px; font-size: 1.05em; display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <i class="fa-solid fa-bell-concierge"></i> <span>تفعيل التذكير الدوري كل ساعتين</span>
+        </button>
+        <div id="notif-status-msg" style="margin-top: 12px; font-weight: bold; text-align: center; display: none;"></div>
     </div>
 </div>

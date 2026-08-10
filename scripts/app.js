@@ -436,6 +436,23 @@ if (document.readyState === 'loading') {
     initApp();
 }
 
+async function activarNotificacionesGuiadas() {
+    const statusMsg = document.getElementById('notif-status-msg');
+    if (typeof solicitarPermisoNotificaciones === 'function') {
+        const res = await solicitarPermisoNotificaciones();
+        if (statusMsg) {
+            statusMsg.style.display = 'block';
+            if (res) {
+                statusMsg.style.color = '#4caf50';
+                statusMsg.innerText = '✅ تم تفعيل التذكير التلقائي الدوري كل ساعتين بنجاح!';
+            } else {
+                statusMsg.style.color = '#f44336';
+                statusMsg.innerText = '❌ يرجى السماح بالإشعارات من إعدادات متصفحك أو جهازك.';
+            }
+        }
+    }
+}
+
 window.onload = function() {
     initApp();
     setTimeout(() => {

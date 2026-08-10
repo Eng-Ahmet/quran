@@ -1,6 +1,6 @@
-/* ====== SERVICE WORKER FOR PWA OFFLINE CACHING & AUTOMATIC FRESH RELOADS ====== */
+/* ====== SERVICE WORKER WITH PWA OFFLINE CACHING, PUSH NOTIFICATIONS, BACKGROUND SYNC & PERIODIC SYNC ====== */
 
-const CACHE_NAME = 'wartel-quran-v24';
+const CACHE_NAME = 'wartel-quran-v25';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -43,7 +43,8 @@ const ASSETS_TO_CACHE = [
   './assets/icon-512.png',
   './assets/apple-touch-icon.png',
   './assets/favicon.png',
-  './assets/Green Simple Business Card.png'
+  './assets/screenshot-mobile.png',
+  './assets/screenshot-desktop.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -87,9 +88,90 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         })
         .catch(() => {
-          // Serve offline cached copy if network fails
           return caches.match(event.request);
         })
     );
+  }
+});
+
+/* ====== 1. PUSH NOTIFICATIONS HANDLER ====== */
+self.addEventListener('push', (event) => {
+  let data = { title: 'ورتل القرآن ترتيلا', body: '🌸 صلّ على النبي ﷺ واذكر الله' };
+  if (event.data) {
+    try {
+      data = event.data.json();
+    } catch (e) {
+      data.body = event.data.text();
+    }
+  }
+
+  const options = {
+    body: data.body,
+    icon: './assets/icon-192.png',
+    badge: './assets/favicon.png',
+    vibrate: [200, 100, 200],
+    data: { url: data.url || './pages/app.html' }
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(data.title, options)
+  );
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const targetUrl = (event.notification.data && event.notification.data.url) ? event.notification.data.url : './pages/app.html';
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      for (let client of clientList) {
+        if (client.url.includes('pages/app.html') && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) {
+        return clients.openWindow(targetUrl);
+      }
+    })
+  );
+});
+
+/* ====== 2. PERIODIC BACKGROUND SYNC HANDLER (תذكير كل ساعتين) ====== */
+self.addEventListener('periodicsync', (event) => {
+  if (event.tag === 'azkar-reminder' || event.tag === 'hourly-reminder') {
+    const reminderMessages = [
+      '🌸 أستغفر الله العظيم وأتوب إليه - لا تنسَ ذكر الله',
+      '✨ سُبْحَانَ اللهِ وَبِحَمْدِهِ ، سُبْحَانَ اللهِ الْعَظِيمِ',
+      '📖 حان وقت قراءة الورد اليومي من المصحف الشريف',
+      '🤍 اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى نَبِيِّنَا مُحَمَّدٍ'
+    ];
+    const message = reminderMessages[Math.floor(Math.random() * reminderMessages.length)];
+
+    event.waitUntil(
+      self.registration.showNotification('ورتل القرآن ترتيلا 📖', {
+        body: message,
+        icon: './assets/icon-192.png',
+        badge: './assets/favicon.png',
+        vibrate: [150, 80, 150]
+      })
+    );
+  }
+});
+
+/* ====== 3. BACKGROUND SYNC HANDLER (مزامنة البيانات أوفلاين) ====== */
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-user-data' || event.tag === 'sync-notes') {
+    console.log('[Service Worker] Background Syncing user notes and data...');
+  }
+});
+
+/* ====== 4. CLIENT MESSAGING API FOR SCHEDULING REMINDERS ====== */
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'TRIGGER_NOTIFICATION') {
+    self.registration.showNotification(event.data.title || 'ورتل القرآن ترتيلا', {
+      body: event.data.body || 'تذكير بالذكر المبارك',
+      icon: './assets/icon-192.png',
+      badge: './assets/favicon.png',
+      vibrate: [200, 100, 200]
+    });
   }
 });
