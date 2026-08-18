@@ -5,9 +5,9 @@
     ],
     "target": {
       "namespace": "android_app",
-      "package_name": "app.wartel.quran",
+      "package_name": "com.onrender.quran_o3ix.twa",
       "sha256_cert_fingerprints": [
-        "FA:2A:B2:7D:51:75:E6:E9:7D:0C:6D:77:8E:B7:02:83:B3:01:E7:5C:3A:E1:9E:09:80:61:94:07:95:24:D3:C1"
+        "14:6D:FC:F9:07:AC:2C:E8:1B:5E:EF:84:52:7B:86:A7:E1:6D:16:22:15:E2:18:C0:2E:B5:5B:EA:D2:55:AC:A0"
       ]
     }
   }
