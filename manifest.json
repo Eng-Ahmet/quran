@@ -32,6 +32,33 @@
   "note_taking": {
     "new_note": "./pages/app.html#pantalla-apuntes"
   },
+  "file_handlers": [
+    {
+      "action": "./pages/app.html#pantalla-apuntes",
+      "accept": {
+        "text/plain": [".txt"],
+        "application/json": [".json"]
+      },
+      "icons": [
+        {
+          "src": "assets/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ],
+      "launch_type": "single-client"
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+quran",
+      "url": "./pages/app.html?surah=%s"
+    },
+    {
+      "protocol": "web+azkar",
+      "url": "./pages/app.html?azkar=%s"
+    }
+  ],
   "edge_side_panel": {
     "preferred_width": 400
   },
