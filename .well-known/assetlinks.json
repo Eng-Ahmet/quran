@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.wartel.quran",
+      "sha256_cert_fingerprints": [
+        "FA:2A:B2:7D:51:75:E6:E9:7D:0C:6D:77:8E:B7:02:83:B3:01:E7:5C:3A:E1:9E:09:80:61:94:07:95:24:D3:C1"
+      ]
+    }
+  }
+]

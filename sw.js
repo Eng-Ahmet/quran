@@ -37,6 +37,7 @@ const ASSETS_TO_CACHE = [
   './locales/es.json',
   './locales/en.json',
   './manifest.json',
+  './.well-known/assetlinks.json',
   './assets/1.png',
   './assets/2.png',
   './assets/icon-192.png',
