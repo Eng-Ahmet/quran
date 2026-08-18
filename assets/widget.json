@@ -1,0 +1,26 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "📖 ورتل القرآن ترتيلا",
+      "weight": "Bolder",
+      "size": "Medium",
+      "color": "Good"
+    },
+    {
+      "type": "TextBlock",
+      "text": "لا تنسَ قراءة وردك اليومي وأذكارك اليومية المباركة.",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "فتح التطبيق",
+      "url": "https://wartel-quran.onrender.com/"
+    }
+  ]
+}

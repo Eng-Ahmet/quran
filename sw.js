@@ -45,7 +45,8 @@ const ASSETS_TO_CACHE = [
   './assets/apple-touch-icon.png',
   './assets/favicon.png',
   './assets/screenshot-mobile.png',
-  './assets/screenshot-desktop.png'
+  './assets/screenshot-desktop.png',
+  './assets/widget.json'
 ];
 
 self.addEventListener('install', (event) => {

@@ -8,6 +8,7 @@
   "display": "standalone",
   "display_override": [
     "window-controls-overlay",
+    "tabbed",
     "standalone",
     "minimal-ui"
   ],
@@ -16,6 +17,7 @@
   "orientation": "portrait-primary",
   "lang": "ar",
   "dir": "rtl",
+  "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34b8de4a52e9",
   "categories": [
     "lifestyle",
     "books",
@@ -27,6 +29,36 @@
       "auto"
     ]
   },
+  "note_taking": {
+    "new_note": "./pages/app.html#pantalla-apuntes"
+  },
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "scope_extensions": [
+    {
+      "origin": "*.onrender.com"
+    }
+  ],
+  "share_target": {
+    "action": "./pages/app.html",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "widgets": [
+    {
+      "name": "ورد اليوم ورتل القرآن",
+      "short_name": "الورد اليومي",
+      "description": "متابعة تلاوة القرآن الكريم والأذكار اليومية",
+      "tag": "quran-daily-wird",
+      "template": "widget-template",
+      "ms_ac_template": "assets/widget.json"
+    }
+  ],
   "prefer_related_applications": false,
   "related_applications": [],
   "screenshots": [
