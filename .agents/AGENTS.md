@@ -71,3 +71,27 @@
    - `styles/app.css` (تنسيقات المصحف الشريف، المسبحة، الأذكار، وبطاقات التفاعل).
    - `styles/login.css` (تنسيقات الدخول والإنشاء).
    - `styles/admin.css` (تنسيقات لوحة المشرف).
+
+---
+
+## 🚀 5. قواعد البناء والتوقيع والـ TWA (Build, Signing & Digital Asset Links)
+1. **ملف Digital Asset Links (`.well-known/assetlinks.json`)**:
+   - اسم الحزمة المعتمد: `com.onrender.quran_o3ix.twa`.
+   - العلاقة المعتمدة: `delegate_permission/common.handle_all_urls`.
+   - بصمة الشهادة (SHA-256): مطابقة لبصمة مفتاح التوقيع المستجلب من Google Play Console أو مفتاح التوقيع المحلي (`quran-release-key.jks`).
+2. **شروط المانيفست `manifest.json` المطلوبة للـ PWA/TWA**:
+   - تضمين `display: "standalone"`, `dir: "rtl"`, `lang: "ar"`, `start_url: "./index.html"`.
+   - توفير أيقونات بحجم `192x192` و `512x512` بنوعي `any` و `maskable`.
+   - توفير لقطات شاشة `screenshots` لكل من الهاتف (`narrow`) والكمبيوتر (`wide`).
+3. **قواعد توقيع وتسمية حزم الأندرويد (Android APK Signing & Naming Rules)**:
+   - يمنع تماماً استخدام أسماء ملفات تحتوي على مسافات، رموز غير ASCII، أو رموز أسطر مخفية في ملفات الـ APK لمنع خطأ `App not installed / Invalid Package` على أجهزة أندرويد.
+   - اعتماد أسماء ملفات قياسية باللغة الإنجليزية فقط (مثل `quran.apk` أو `quran-aligned-signed.apk`).
+   - توقيع حزم الـ APK دائماً باستخدام تقنيات التوقيع المعتمدة (v1/v2/v3) والمحاذاة بـ `zipalign` عبر مفتاح التوقيع المحلي `quran-release-key.jks` وكلمة المرور `quran123`.
+4. **خطوات توقيع الـ APK قبل الإرسال**:
+   - 1. نسخ الـ APK غير الموقّع من PWABuilder باسم إنجليزي بدون مسافات: `cp unsigned.apk quran-unsigned.apk`
+   - 2. تشغيل التوقيع: `java -jar /tmp/uber-apk-signer.jar --apks quran-unsigned.apk --ks quran-release-key.jks --ksAlias quran --ksPass quran123 --ksKeyPass quran123`
+   - 3. إرسال الملف الناتج الموقّع `quran.apk` للهاتف.
+5. **التوثيق المستمر وتحديث القواعد تلقائياً**:
+   - عند الانتهاء من أي تطوير أو إعداد مفصلي في التطبيق، يتم تحديث ملف القواعد `.agents/AGENTS.md` ودليل المشروع `README.md` لضمان حفظ واستمرارية جميع الإعدادات والهيكلية في الجلسات القادمة.
+
+
