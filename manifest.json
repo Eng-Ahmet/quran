@@ -2,24 +2,40 @@
   "name": "ورتل القرآن ترتيلا",
   "short_name": "ورتل القرآن ترتيلا",
   "description": "تطبيق إسلامي شامل وموثوق للقرآن الكريم، الأذكار اليومية، المسبحة الإلكترونية، واتجاه القبلة",
-  "id": "/",
+  "id": "./index.html",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "display_override": ["fullscreen", "standalone", "minimal-ui"],
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
   "background_color": "#040906",
   "theme_color": "#040906",
   "orientation": "portrait-primary",
   "lang": "ar",
   "dir": "rtl",
-  "categories": ["lifestyle", "books", "education"],
+  "categories": [
+    "lifestyle",
+    "books",
+    "education"
+  ],
+  "launch_handler": {
+    "client_mode": [
+      "focus-existing",
+      "auto"
+    ]
+  },
+  "prefer_related_applications": false,
+  "related_applications": [],
   "screenshots": [
     {
       "src": "assets/screenshot-mobile.png",
       "sizes": "640x1136",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "واجهة تطبيق ورتل القرآن ترتيلا"
+      "label": "واجهة تطبيق ورتل القرآن ترتيلا للأجهزة المحمولة"
     },
     {
       "src": "assets/screenshot-desktop.png",
@@ -35,21 +51,39 @@
       "short_name": "المصحف",
       "description": "قراءة وتلاوة القرآن الكريم",
       "url": "./pages/app.html#pantalla-coran",
-      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+      "icons": [
+        {
+          "src": "assets/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "الأذكار اليومية",
       "short_name": "الأذكار",
-      "description": "أذكار الصباح والمساء الصلاة",
+      "description": "أذكار الصباح والمساء والصلاة",
       "url": "./pages/app.html#pantalla-azkar",
-      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+      "icons": [
+        {
+          "src": "assets/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "المسبحة الإلكترونية",
       "short_name": "المسبحة",
-      "description": "العداد والذبيح الرقمي",
+      "description": "العداد والتسبيح الرقمي",
       "url": "./pages/app.html#pantalla-tasbeeh",
-      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+      "icons": [
+        {
+          "src": "assets/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ],
   "icons": [
